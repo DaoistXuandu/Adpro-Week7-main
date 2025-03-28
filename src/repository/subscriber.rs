@@ -27,7 +27,6 @@ impl SubscriberRepository {
         };
 
         return SUBSCRIBERS.get(product_type).unwrap().iter()
-            .map(|f| f.value().clone()).collect();
-            
+            .map(|f| f.value().clone()).collect();        
     }
 }
