@@ -125,3 +125,23 @@ Postman is a powerful API testing tool that helps developers interact with APIs,
 Some of the most useful features in Postman include Collections, which allow organizing and reusing API requests, and Environment Variables, which enable testing the same API with different configurations. Automated testing through Postman’s built-in scripting capabilities is also valuable for continuous integration workflows. For group projects, collaboration features like shared workspaces help teams work on API development together. In future software engineering projects, Postman can be useful for API documentation, testing authentication flows, and ensuring API endpoints behave as expected before integrating them into frontend or backend applications.
 
 #### Reflection Publisher-3
+```
+Observer Pattern has two variations: Push model (publisher pushes data to subscribers) and Pull model (subscribers pull data from publisher). In this tutorial case, which variation of Observer Pattern that we use?
+```
+In this tutorial case, we use the Push model, where the publisher directly sends data to subscribers whenever an update occurs. This means that whenever an event happens in the system, such as a Program generating a new update, all subscribed Subscribers immediately receive the relevant notification. This approach ensures real-time updates and minimizes the need for subscribers to check for new information manually. The Push model is efficient in scenarios where immediate notification delivery is essential and when subscribers expect to receive updates without actively polling for them.
+
+Using the Push model simplifies the subscriber’s responsibilities since they do not need to check for updates periodically. However, it also means that the publisher has to manage all the updates and send them to the appropriate subscribers, which can become complex if there are many subscribers. Additionally, if a subscriber is not ready to process the notification at the time of delivery, there is a risk that the data might be lost or cause processing delays.
+
+```
+What are the advantages and disadvantages of using the other variation of Observer Pattern for this tutorial case? (example: if you answer Q1 with Push, then imagine if we used Pull)
+```
+If we were to use the Pull model instead of the Push model, subscribers would need to request updates from the publisher rather than receiving them automatically. This means that instead of the Program pushing notifications to Subscribers, each Subscriber would periodically check with the Program to see if there are new updates. One major advantage of this approach is that it reduces the workload on the publisher since it does not have to manage sending notifications to all subscribers. Instead, subscribers fetch data when they need it, allowing for better control over when updates are processed.
+
+However, the Pull model has significant drawbacks in this scenario. Subscribers would need to frequently check for updates, leading to unnecessary requests if there are no new notifications. This could introduce inefficiencies, especially if the polling frequency is too high, wasting system resources. On the other hand, if the polling frequency is too low, updates might be delayed, leading to outdated information. In a notification-based system like this, the Push model is generally more suitable because it ensures that subscribers receive updates as soon as they occur, rather than relying on periodic checks.
+
+```
+Explain what will happen to the program if we decide to not use multi-threading in the notification process.
+```
+If we do not use multi-threading in the notification process, all notifications would be sent sequentially in a single-threaded manner. This means that when a Program triggers an event, it would have to send notifications to each Subscriber one at a time, blocking execution until all notifications are processed. If there are a large number of subscribers, this could introduce significant delays, slowing down the entire system. In extreme cases, a single slow subscriber could hold up the entire notification process, leading to performance bottlenecks.
+
+With multi-threading, notifications can be sent concurrently, allowing multiple subscribers to receive and process notifications simultaneously. This improves efficiency, reduces latency, and ensures that the system remains responsive. Without multi-threading, the system may struggle to handle a large number of notifications efficiently, making it less scalable and potentially leading to a poor user experience. In real-world applications, multi-threading is crucial for maintaining smooth performance, especially in event-driven architectures like the Observer Pattern.
