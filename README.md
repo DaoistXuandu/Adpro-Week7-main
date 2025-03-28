@@ -101,5 +101,27 @@ Solution: The Singleton pattern ensures that only one instance of the subscriber
 DashMap, on the other hand, is designed for concurrent access and allows multiple threads to read and write safely without blocking each other. Since DashMap internally manages thread safety, it eliminates the need for manual locking, improving performance and efficiency. Even if a Singleton pattern is used to ensure a single instance, DashMap should still be the preferred choice for storing the subscriber list because of its built-in concurrency support. This makes DashMap the best solution for managing subscribers safely and efficiently in a multi-threaded environment.
 
 #### Reflection Publisher-2
+```
+In the Model-View Controller (MVC) compound pattern, there is no “Service” and “Repository”. Model in MVC covers both data storage and business logic. Explain based on your understanding of design principles, why we need to separate “Service” and “Repository” from a Model?
+```
+Separating the “Service” and “Repository” layers follows the Single Responsibility Principle (SRP), ensuring that each component has a distinct purpose. The Repository layer is responsible for interacting with the database, handling queries, and managing data persistence, while the Service layer contains business logic and orchestrates interactions between different models. This separation makes the codebase more modular, testable, and maintainable. By keeping business logic out of the data access layer, we reduce dependencies and avoid direct coupling between the database and application logic.
+
+If the Model handles both business logic and data access, it becomes difficult to manage as the application grows. Any changes in how data is stored or retrieved could require modifications to business logic, increasing the risk of unintended side effects. By using separate Service and Repository layers, we can change the database implementation without affecting business logic and vice versa. This approach also improves scalability, as different parts of the application can evolve independently without breaking the entire system.
+
+```
+What happens if we only use the Model? Explain your imagination on how the interactions between each model
+```
+If all logic is placed inside the Model, interactions between different models become tightly coupled, leading to increased code complexity. For example, if the Program model needs to notify a Subscriber, it would have to directly handle the logic for sending notifications, checking subscriber preferences, and ensuring message delivery. This makes the Program model responsible for multiple concerns beyond its primary function, violating the Single Responsibility Principle. As more features are added, the dependencies between models grow, making the system harder to maintain and debug.
+
+With separate Service and Repository layers, these interactions become more structured and manageable. A NotificationService could handle message delivery, while a SubscriberService manages subscriber preferences. The Program model would only need to interact with these services instead of handling everything itself. This modular approach simplifies code maintenance, improves reusability, and makes it easier to introduce changes without affecting multiple parts of the system. Without this separation, every change to one model could have unintended consequences on others, making development slower and error-prone.
+
+
+
+```
+Have you explored more about Postman? Tell us how this tool helps you to test your current work. You might want to also list which features in Postman you are interested in or feel like it is helpful to help your Group Project or any of your future software engineering projects.
+```
+Postman is a powerful API testing tool that helps developers interact with APIs, automate testing, and debug requests efficiently. One of its key advantages is allowing users to send HTTP requests without needing to write client-side code, making it easier to test endpoints quickly. It also provides detailed response data, including headers, status codes, and response times, which helps in identifying issues early in the development process.
+
+Some of the most useful features in Postman include Collections, which allow organizing and reusing API requests, and Environment Variables, which enable testing the same API with different configurations. Automated testing through Postman’s built-in scripting capabilities is also valuable for continuous integration workflows. For group projects, collaboration features like shared workspaces help teams work on API development together. In future software engineering projects, Postman can be useful for API documentation, testing authentication flows, and ensuring API endpoints behave as expected before integrating them into frontend or backend applications.
 
 #### Reflection Publisher-3
